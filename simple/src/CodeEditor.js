@@ -9,7 +9,9 @@ const CodeEditor = () => {
   const codeRef = useRef(null); // useRef for referencing the code element
 
   useEffect(() => {
-    Prism.highlightElement(codeRef.current); // HighlightElement use to highlight current element when it changes
+    if (codeRef.current) {
+        Prism.highlightElement(codeRef.current);
+      } // HighlightElement use to highlight current element when it changes
   }, [code]);// Trigger useeffect when code changes
 
 
@@ -24,10 +26,10 @@ const CodeEditor = () => {
 
       {/* by using className="language-js" informs Prism.js to highlight the code as JavaScript */}
       {/* use <pre>  because it preserves whitespace, maintains consistent alignment with a monospace font , better to use with prism */}
-      <pre className="language-js">
+      <pre>
         {/* Use useRef for creating a persistent reference that doesn't trigger re-renders. It is handy for managing DOM elements and storing values. */}
         <code ref={codeRef} className="language-js">
-          {code} {/* Display the code entered by the user */}
+          {code}
         </code>
       </pre>
     </div>
